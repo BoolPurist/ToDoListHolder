@@ -1,41 +1,183 @@
 // Variables.
+@background-color: #88c1dd;
+@background-color-header: #4f8d73;
 @text-color: white;
-@text-underline-thickness: 4px;
-@symbol-removable-size: 20px;
+@text-color-header: rgb(88, 175, 110);
+@text-underline-thickness: 2px;
+@text-size: 20px;
+@symbol-removable-size: 30px;
 @symbol-removable-margin-top: 30%;
+@symbol-removable-bar-radius: 50%;
+@border-radius-bars-size: 50%;
+@adder-symbol-transition: background-color 2s;
+@remove-symbol-transition: background-color 2s, transform 1s, height 1s,
+  border-radius 1s;
 
+// Make sure every element behaves the same when not modified.
 * {
   box-sizing: border-box;
+  // Some elements have margin by default.
   margin: 0;
+  font-size: @text-size;
 }
 
 body {
-  background-color: #88c1dd;
+  background-color: @background-color;
 }
 
-.list {
+// .firstColorSection {
+//   background-color: @background-color-header;
+//   top: 0;
+//   position: absolute;
+//   width: 100%;
+//   height: 260px;
+//   z-index: -1;
+// }
+
+// style hierarchy for .wrapper <div>
+//  |-- .adderForToDo
+//  |-- .list
+.wrapper {
+  // Wrapper should be centered in the center. Looks better.
   width: 80%;
+  margin: auto;
   margin-top: 2%;
-  margin-left: 8%;
   display: grid;
   grid-template-rows: 1fr;
+}
+
+label {
+  font-weight: bold;
+  text-align: center;
+  font-family: Arial, Gadget, sans-serif;
+  letter-spacing: 2px;
+}
+
+// For every widget like the remover and adder to give size, color and margin.
+#mixInSymbol {
+  margin-top: @symbol-removable-margin-top;
+  height: @symbol-removable-size;
+}
+// Grid layout for widget and text in a container.
+#mixInGridColSignText {
+  display: grid;
+  grid-template-columns: @symbol-removable-size 1fr;
+  column-gap: 10px;
+}
+
+// styles the text content of every box.
+#mixInUnderlineText {
+  word-break: break-word;
+
+  color: @text-color;
+  text-decoration: underline;
+  text-decoration-thickness: @text-underline-thickness;
+  text-underline-offset: 7px;
+}
+
+#mixInAdderBars {
+  position: absolute;
+  background-color: white;
+  width: 20%;
+  height: 100%;
+  left: 40%;
+  transition: @adder-symbol-transition;
+}
+
+// style hierarchy for .adderForToDo <div>
+//    |-- label <lable>
+//    |-- .adderSign <div>
+//    |-- .input <textarea>
+.adderForToDo {
+  #mixInGridColSignText();
+  margin-top: 20px;
+  .adderSign {
+    #mixInSymbol();
+    position: relative;
+    .leftBar {
+      #mixInAdderBars();
+    }
+    .rightBar {
+      #mixInAdderBars();
+      transform: rotate(90deg);
+    }
+    .leftBar.hover,
+    .rightBar.hover {
+      background-color: green;
+      transition: @adder-symbol-transition;
+    }
+  }
+  .input {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    line-height: 1.5em;
+    #mixInUnderlineText();
+    background-color: darken(@background-color-header, 10%, relative);
+
+    margin-bottom: 2em;
+  }
+  .input:focus {
+    background-color: @background-color-header;
+  }
+}
+
+// style hierarchy
+//  |-- .list <div>
+//    |-- .toToDoBoxRemovable <div> Serves as container for remove widget and the text content.
+//      |-- .removable <div> the sign to be clicked to remove a toDoBox.
+//      |-- .line <p>
+
+#mixInRemovableBarsCircle {
+  background-color: white;
+  width: @border-radius-bars-size;
+  height: @border-radius-bars-size;
+  border-radius: @symbol-removable-bar-radius;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transition: @remove-symbol-transition;
+}
+.list {
+  display: grid;
+  grid-template-rows: 1fr;
+  row-gap: 8px;
   .toToDoBoxRemovable {
-    width: 100%;
-    display: grid;
-    grid-template-columns: @symbol-removable-size 1fr;
-    column-gap: 10px;
+    #mixInGridColSignText();
     .removable {
-      margin-top: @symbol-removable-margin-top;
-      background-color: #fff;
-      height: @symbol-removable-size;
+      #mixInSymbol();
+      position: relative;
+      .leftBar {
+        #mixInRemovableBarsCircle();
+      }
+      .rightBar {
+        #mixInRemovableBarsCircle();
+      }
+      .leftBar.hover,
+      .rightBar.hover {
+        height: 100%;
+        width: 20%;
+        background-color: red;
+      }
+
+      #barsHover(@direction: 1) {
+        transform: rotate(45deg * @direction);
+        left: 40%;
+        top: -7%;
+        border-radius: 10%;
+        transition: @remove-symbol-transition;
+      }
+
+      .leftBar.hover {
+        #barsHover();
+      }
+      .rightBar.hover {
+        #barsHover(-1);
+      }
     }
     .line {
-      word-break: break-word;
-      color: @text-color;
-      width: 100%;
-      text-decoration: underline;
-      text-decoration-thickness: @text-underline-thickness;
-      text-underline-offset: 5px;
+      #mixInUnderlineText();
+      margin-top: 9px;
     }
   }
 }
