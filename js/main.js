@@ -1,30 +1,22 @@
 /* jshint esversion: 6 */
 (function() {
   "use strict";
-  function List() {
-    // Creating main container.
-
-    let list = document.createElement("div");
-    list.classList.add("list");
-    document.body.appendChild(list);
-
-    return list;
-  }
-
+  // Testing.
+  let list = document.getElementsByClassName("list");
+  console.log(list);
+  let testString = "xxxx".repeat(80);
+  list[0].appendChild(ToDoBoxRemovable(testString));
+  // Returns a ToDoBox with text and a sign to click on. Clicking on that removes the toDoBox.
   function ToDoBoxRemovable(text) {
-    let toDoBox = document.createElement("div");
-    toDoBox.classList.add("toToDoBoxRemovable");
-    let removeIcon = document.createElement("div");
-    removeIcon.classList.add("removable");
-    let textContent = document.createElement("p");
-    textContent.classList.add("line");
-    textContent.innerText = text;
-    toDoBox.appendChild(removeIcon);
-    toDoBox.appendChild(textContent);
-
-    return toDoBox;
+    let toDoBoxRemovable = document.createElement("div");
+    toDoBoxRemovable.classList.add("toToDoBoxRemovable");
+    let removable = document.createElement("div");
+    removable.classList.add("removable");
+    let line = document.createElement("p");
+    line.classList.add("line");
+    line.innerText = text;
+    toDoBoxRemovable.appendChild(removable);
+    toDoBoxRemovable.appendChild(line);
+    return toDoBoxRemovable;
   }
-
-  let item = List();
-  item.appendChild(ToDoBoxRemovable("asdfa sd".repeat(50)));
 })();

@@ -1,41 +1,86 @@
 // Variables.
+@background-color: #88c1dd;
 @text-color: white;
 @text-underline-thickness: 4px;
 @symbol-removable-size: 20px;
 @symbol-removable-margin-top: 30%;
 
+// Make sure every element behaves the same when not modified.
 * {
   box-sizing: border-box;
+  // Some elements have margin by default.
   margin: 0;
 }
 
 body {
-  background-color: #88c1dd;
+  background-color: @background-color;
 }
 
-.list {
+// style hierarchy for .wrapper <div>
+//  |-- .adderForToDo
+//  |-- .list
+.wrapper {
+  // Wrapper should be centered in the center. Looks better.
   width: 80%;
   margin-top: 2%;
   margin-left: 8%;
   display: grid;
   grid-template-rows: 1fr;
+}
+
+// For every widget like the remover and adder to give size, color and margin.
+#mixInSymbol {
+  margin-top: @symbol-removable-margin-top;
+  background-color: black;
+  height: @symbol-removable-size;
+}
+// Grid layout for widget and text in a container.
+#mixInGridColSignText {
+  display: grid;
+  grid-template-columns: @symbol-removable-size 1fr;
+  column-gap: 10px;
+}
+
+// styles the text content of every box.
+#mixInUnderlineText {
+  word-break: break-word;
+  color: @text-color;
+  text-decoration: underline;
+  text-decoration-thickness: @text-underline-thickness;
+  text-underline-offset: 5px;
+}
+
+// style hierarchy for .adderForToDo <div>
+//    |-- label <lable>
+//    |-- .adderSign <div>
+//    |-- .input <textarea>
+.adderForToDo {
+  #mixInGridColSignText();
+  .adderSign {
+    #mixInSymbol();
+  }
+  .input {
+    border: none;
+    line-height: 20px;
+    #mixInUnderlineText();
+    background-color: @background-color;
+  }
+}
+
+// style hierarchy
+//  |-- .list <div>
+//    |-- .toToDoBoxRemovable <div> Serves as container for remove widget and the text content.
+//    |-- .line <p>
+.list {
+  display: grid;
+  grid-template-rows: 1fr;
   .toToDoBoxRemovable {
-    width: 100%;
-    display: grid;
-    grid-template-columns: @symbol-removable-size 1fr;
-    column-gap: 10px;
+    #mixInGridColSignText();
     .removable {
-      margin-top: @symbol-removable-margin-top;
-      background-color: #fff;
-      height: @symbol-removable-size;
+      #mixInSymbol();
     }
     .line {
-      word-break: break-word;
-      color: @text-color;
-      width: 100%;
-      text-decoration: underline;
-      text-decoration-thickness: @text-underline-thickness;
-      text-underline-offset: 5px;
+      #mixInUnderlineText();
     }
   }
 }
