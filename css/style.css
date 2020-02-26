@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  background-color: #88c1dd;
+}
+.list {
+  width: 80%;
+  margin-top: 2%;
+  margin-left: 8%;
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.list .toToDoBoxRemovable {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  column-gap: 10px;
+}
+.list .toToDoBoxRemovable .removable {
+  margin-top: 30%;
+  background-color: #fff;
+  height: 20px;
+}
+.list .toToDoBoxRemovable .line {
+  word-break: break-word;
+  color: white;
+  width: 100%;
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 5px;
+}
