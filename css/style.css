@@ -21,31 +21,60 @@ label {
 }
 #mixInSymbol {
   margin-top: 30%;
-  background-color: black;
-  height: 20px;
+  height: 30px;
 }
 #mixInGridColSignText {
   display: grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 30px 1fr;
   column-gap: 10px;
 }
 #mixInUnderlineText {
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 0.2em;
-  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+}
+#mixInAdderBars {
+  position: absolute;
+  background-color: white;
+  width: 20%;
+  height: 100%;
+  left: 40%;
+  transition: background-color 2s;
 }
 .adderForToDo {
   display: grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 30px 1fr;
   column-gap: 10px;
   margin-top: 20px;
 }
 .adderForToDo .adderSign {
   margin-top: 30%;
-  background-color: black;
-  height: 20px;
+  height: 30px;
+  position: relative;
+}
+.adderForToDo .adderSign .leftBar {
+  position: absolute;
+  background-color: white;
+  width: 20%;
+  height: 100%;
+  left: 40%;
+  transition: background-color 2s;
+}
+.adderForToDo .adderSign .rightBar {
+  position: absolute;
+  background-color: white;
+  width: 20%;
+  height: 100%;
+  left: 40%;
+  transition: background-color 2s;
+  transform: rotate(90deg);
+}
+.adderForToDo .adderSign .leftBar.hover,
+.adderForToDo .adderSign .rightBar.hover {
+  background-color: green;
+  transition: background-color 2s;
 }
 .adderForToDo .input {
   padding: 10px;
@@ -55,10 +84,23 @@ label {
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 0.2em;
-  text-underline-offset: 5px;
-  background-color: #4f8d73;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+  background-color: #477f68;
   margin-bottom: 2em;
+}
+.adderForToDo .input:focus {
+  background-color: #4f8d73;
+}
+#mixInRemovableBarsCircle {
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transition: background-color 2s, transform 1s, height 1s, border-radius 1s;
 }
 .list {
   display: grid;
@@ -67,18 +109,59 @@ label {
 }
 .list .toToDoBoxRemovable {
   display: grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 30px 1fr;
   column-gap: 10px;
 }
 .list .toToDoBoxRemovable .removable {
   margin-top: 30%;
-  background-color: black;
-  height: 20px;
+  height: 30px;
+  position: relative;
+}
+.list .toToDoBoxRemovable .removable .leftBar {
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transition: background-color 2s, transform 1s, height 1s, border-radius 1s;
+}
+.list .toToDoBoxRemovable .removable .rightBar {
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transition: background-color 2s, transform 1s, height 1s, border-radius 1s;
+}
+.list .toToDoBoxRemovable .removable .leftBar.hover,
+.list .toToDoBoxRemovable .removable .rightBar.hover {
+  height: 100%;
+  width: 20%;
+  background-color: red;
+}
+.list .toToDoBoxRemovable .removable .leftBar.hover {
+  transform: rotate(45deg);
+  left: 40%;
+  top: -7%;
+  border-radius: 10%;
+  transition: background-color 2s, transform 1s, height 1s, border-radius 1s;
+}
+.list .toToDoBoxRemovable .removable .rightBar.hover {
+  transform: rotate(-45deg);
+  left: 40%;
+  top: -7%;
+  border-radius: 10%;
+  transition: background-color 2s, transform 1s, height 1s, border-radius 1s;
 }
 .list .toToDoBoxRemovable .line {
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 0.2em;
-  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+  margin-top: 9px;
 }
