@@ -1,16 +1,23 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-size: 20px;
 }
 body {
   background-color: #88c1dd;
 }
 .wrapper {
   width: 80%;
+  margin: auto;
   margin-top: 2%;
-  margin-left: 8%;
   display: grid;
   grid-template-rows: 1fr;
+}
+label {
+  font-weight: bold;
+  text-align: center;
+  font-family: Arial, Gadget, sans-serif;
+  letter-spacing: 2px;
 }
 #mixInSymbol {
   margin-top: 30%;
@@ -26,13 +33,14 @@ body {
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 0.2em;
   text-underline-offset: 5px;
 }
 .adderForToDo {
   display: grid;
   grid-template-columns: 20px 1fr;
   column-gap: 10px;
+  margin-top: 20px;
 }
 .adderForToDo .adderSign {
   margin-top: 30%;
@@ -40,18 +48,22 @@ body {
   height: 20px;
 }
 .adderForToDo .input {
+  padding: 10px;
   border: none;
-  line-height: 20px;
+  border-radius: 3px;
+  line-height: 1.5em;
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 0.2em;
   text-underline-offset: 5px;
-  background-color: #88c1dd;
+  background-color: #4f8d73;
+  margin-bottom: 2em;
 }
 .list {
   display: grid;
   grid-template-rows: 1fr;
+  row-gap: 8px;
 }
 .list .toToDoBoxRemovable {
   display: grid;
@@ -67,6 +79,6 @@ body {
   word-break: break-word;
   color: white;
   text-decoration: underline;
-  text-decoration-thickness: 4px;
+  text-decoration-thickness: 0.2em;
   text-underline-offset: 5px;
 }
