@@ -12,47 +12,9 @@
 @adder-symbol-transition: background-color 2s;
 @remove-symbol-transition: background-color 2s, transform 1s, height 1s,
   border-radius 1s;
+@padding-borderLeft-text: 10px;
 
-// Make sure every element behaves the same when not modified.
-* {
-  box-sizing: border-box;
-  // Some elements have margin by default.
-  margin: 0;
-  font-size: @text-size;
-}
-
-body {
-  background-color: @background-color;
-}
-
-// .firstColorSection {
-//   background-color: @background-color-header;
-//   top: 0;
-//   position: absolute;
-//   width: 100%;
-//   height: 260px;
-//   z-index: -1;
-// }
-
-// style hierarchy for .wrapper <div>
-//  |-- .adderForToDo
-//  |-- .list
-.wrapper {
-  // Wrapper should be centered in the center. Looks better.
-  width: 80%;
-  margin: auto;
-  margin-top: 2%;
-  display: grid;
-  grid-template-rows: 1fr;
-}
-
-label {
-  font-weight: bold;
-  text-align: center;
-  font-family: Arial, Gadget, sans-serif;
-  letter-spacing: 2px;
-}
-
+// MixIns
 // For every widget like the remover and adder to give size, color and margin.
 #mixInSymbol {
   margin-top: @symbol-removable-margin-top;
@@ -84,11 +46,82 @@ label {
   transition: @adder-symbol-transition;
 }
 
+// mixIns
+#mixInHoverLighterItem(@lightHueTextColor: 30%) {
+  border: none;
+  border-left: solid;
+  border-right: solid;
+  border-color: darken(@text-color, @lightHueTextColor, relative);
+
+  &:hover {
+    border-color: @text-color;
+  }
+  &:focus {
+    background-color: lighten(@background-color-header, 5%, relative);
+  }
+}
+
+#mixInRemovableBarsCircle {
+  background-color: white;
+  width: @border-radius-bars-size;
+  height: @border-radius-bars-size;
+  border-radius: @symbol-removable-bar-radius;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transition: @remove-symbol-transition;
+}
+
+// Make sure every element behaves the same when not modified.
+* {
+  box-sizing: border-box;
+  // Some elements have margin by default.
+  margin: 0;
+  padding: 0;
+  font-size: @text-size;
+}
+
+body {
+  background-color: @background-color;
+}
+
+.firstColorSection {
+  background-color: @background-color-header;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  z-index: -1;
+}
+
+// style hierarchy for .wrapper <div>
+//  |-- .adderForToDo
+//  |-- .list
+.wrapper {
+  // Wrapper should be centered in the center. Looks better.
+  height: 100%;
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+  display: grid;
+  grid-template-rows: 1fr;
+  row-gap: 10px;
+}
+label {
+  font-weight: bold;
+  text-align: center;
+  font-family: cursive;
+  letter-spacing: 2px;
+}
+
 // style hierarchy for .adderForToDo <div>
 //    |-- label <lable>
 //    |-- .adderSign <div>
 //    |-- .input <textarea>
 .adderForToDo {
+  textarea {
+    resize: none;
+  }
   #mixInGridColSignText();
   margin-top: 20px;
   .adderSign {
@@ -108,17 +141,16 @@ label {
     }
   }
   .input {
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
+    padding: @padding-borderLeft-text;
+
+    #mixInHoverLighterItem();
+
     line-height: 1.5em;
     #mixInUnderlineText();
-    background-color: darken(@background-color-header, 10%, relative);
+
+    background-color: @background-color-header;
 
     margin-bottom: 2em;
-  }
-  .input:focus {
-    background-color: @background-color-header;
   }
 }
 
@@ -128,16 +160,6 @@ label {
 //      |-- .removable <div> the sign to be clicked to remove a toDoBox.
 //      |-- .line <p>
 
-#mixInRemovableBarsCircle {
-  background-color: white;
-  width: @border-radius-bars-size;
-  height: @border-radius-bars-size;
-  border-radius: @symbol-removable-bar-radius;
-  position: absolute;
-  top: 20%;
-  left: 20%;
-  transition: @remove-symbol-transition;
-}
 .list {
   display: grid;
   grid-template-rows: 1fr;
@@ -177,7 +199,26 @@ label {
     }
     .line {
       #mixInUnderlineText();
+      #mixInHoverLighterItem(20%);
+      border-right: none;
+      padding-left: @padding-borderLeft-text;
       margin-top: 9px;
     }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  label {
+    font-size: 16px;
+  }
+  .wrapper {
+    padding-left: 10%;
+    width: 100%;
+  }
+  textarea {
+    width: 70%;
+  }
+  .list {
+    width: 70%;
   }
 }

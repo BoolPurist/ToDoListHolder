@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 (function() {
   "use strict";
-  let list = document.getElementsByClassName("list");
+  let list = document.querySelector(".list");
   let adderBox = document.querySelector(".adderForToDo");
   let adderSign = adderBox.querySelector(".adderSign");
   adderSign.addEventListener(
@@ -12,7 +12,7 @@
       let text = textarea.value;
       if (text.length !== 0) {
         let toDoBoxRemovable = ToDoBoxRemovable(text);
-        list[0].appendChild(toDoBoxRemovable);
+        list.appendChild(toDoBoxRemovable);
         textarea.value = "";
       }
     },
@@ -40,11 +40,14 @@
   );
 
   // Testing.
-  let testString = "xxxx".repeat(80);
-  list[0].appendChild(ToDoBoxRemovable(testString));
-  // EndTesting.
-  // Returns a ToDoBox with text and a sign to click on. Clicking on that removes the toDoBox.
+  // let testString = "xx xx".repeat(40);
+  // for (let i = 0; i < 3; i++) {
+  //   list.appendChild(ToDoBoxRemovable(testString));
+  // }
 
+  // EndTesting.
+
+  // Returns a ToDoBox with text and a sign to click on. Clicking on that removes the toDoBox.
   function ToDoBoxRemovable(text) {
     let toDoBoxRemovable = document.createElement("div");
     toDoBoxRemovable.classList.add("toToDoBoxRemovable");
