@@ -56,7 +56,7 @@ body {
   margin-top: 2%;
   display: grid;
   grid-template-rows: 1fr;
-  row-gap: 10px;
+  row-gap: 20px;
 }
 label {
   font-weight: bold;
@@ -68,7 +68,6 @@ label {
   display: grid;
   grid-template-columns: 30px 1fr;
   column-gap: 10px;
-  margin-top: 20px;
 }
 .adderForToDo textarea {
   resize: none;
@@ -102,6 +101,7 @@ label {
 }
 .adderForToDo .input {
   padding: 10px;
+  cursor: default;
   border: none;
   border-left: solid;
   border-right: solid;
@@ -197,15 +197,24 @@ label {
   background-color: #539479;
 }
 @media screen and (max-width: 550px) {
+  .firstColorSection {
+    height: 280px;
+  }
   label {
     font-size: 16px;
+    letter-spacing: 1px;
   }
   .wrapper {
-    padding-left: 10%;
     width: 100%;
   }
+  .adderForToDo {
+    margin-left: 5%;
+  }
+  .toToDoBoxRemovable {
+    margin-left: 5%;
+  }
   textarea {
-    width: 70%;
+    width: 90%;
   }
   .list {
     width: 70%;
