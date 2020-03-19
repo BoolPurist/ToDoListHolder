@@ -4,6 +4,85 @@
   let list = document.querySelector(".list");
   let adderBox = document.querySelector(".adderForToDo");
   let adderSign = adderBox.querySelector(".adderSign");
+
+  // If the website is used with a touch screen.
+  document.addEventListener("touchstart", callbackTouch, false);
+  document.addEventListener("touchmove", callbackTouch, false);
+  document.addEventListener("touchend", callbackTouch, false);
+
+  // Check if the touch cursor is in a sign.
+  function callbackTouch(event) {
+    // prevents error message in console because of not found touch cursors.
+    if (
+      event.changedTouches == null ||
+      event.changedTouches === undefined ||
+      event.changedTouches.length === 0
+    ) {
+      return;
+    }
+    let currentX = event.changedTouches[0].pageX;
+    let currentY = event.changedTouches[0].pageY;
+    let removeHitboxClass = "removable";
+
+    // Getting the one adderSign hitbox
+    let adderSignHitbox = document.body
+      .querySelector(".wrapper")
+      .querySelector(".adderForToDo")
+      .querySelector(".adderSign");
+    // Checking if cursor is on the adderSign while touching.
+    TouchInBounding(adderSignHitbox);
+
+    let removeHitboxes = document.body
+      .querySelector(".wrapper")
+      .querySelector(".list")
+      .querySelectorAll(".toToDoBoxRemovable");
+    // Preventing error message in the browser console if there is no toDoBoxRemovable there.
+    if (
+      removeHitboxes === null ||
+      removeHitboxes === undefined ||
+      removeHitboxes.length === 0
+    ) {
+      return;
+    }
+    removeHitboxes.forEach(function(element) {
+      let removable = element.querySelector(".removable");
+      TouchInBounding(removable);
+    });
+
+    // Change shape of adder sign or remove sign when the touching cursor is in the respective hitbox.
+    function TouchInBounding(boundingBox) {
+      let boundingBoxRec = boundingBox.getBoundingClientRect();
+      // check if touching cursor is in the bounding box.
+      if (
+        boundingBoxRec.bottom > currentY &&
+        boundingBoxRec.top < currentY &&
+        boundingBoxRec.left < currentX &&
+        boundingBoxRec.right > currentX
+      ) {
+        // check if the shape is already right when cursor is inside hitbox.
+        if (!boundingBox.classList.contains("hover")) {
+          let leftBar = boundingBox.querySelector(".leftBar");
+          let rightBar = boundingBox.querySelector(".rightBar");
+          leftBar.classList.add("hover");
+          rightBar.classList.add("hover");
+        }
+      } else {
+        // check if the shape is already right when cursor is outside hitbox.
+        let leftBar = boundingBox.querySelector(".leftBar");
+        let rightBar = boundingBox.querySelector(".rightBar");
+        if (
+          leftBar.classList.contains("hover") &&
+          rightBar.classList.contains("hover")
+        ) {
+          leftBar.classList.remove("hover");
+          rightBar.classList.remove("hover");
+        }
+      }
+    }
+
+    // querring all removable signs.
+  }
+
   adderSign.addEventListener(
     "click",
     function(event) {
@@ -18,34 +97,22 @@
     },
     false
   );
-  adderSign.addEventListener(
-    "mouseover",
-    function(event) {
-      let leftBar = event.currentTarget.querySelector(".leftBar");
-      let rightBar = event.currentTarget.querySelector(".rightBar");
-      leftBar.classList.add("hover");
-      rightBar.classList.add("hover");
-    },
-    false
-  );
-  adderSign.addEventListener(
-    "mouseout",
-    function(event) {
-      let leftBar = event.currentTarget.querySelector(".leftBar");
-      let rightBar = event.currentTarget.querySelector(".rightBar");
-      leftBar.classList.remove("hover");
-      rightBar.classList.remove("hover");
-    },
-    false
-  );
+  adderSign.addEventListener("mouseover", callbackMouseOver, false);
+  adderSign.addEventListener("mouseout", callbackMouseOut, false);
 
-  // Testing.
-  // let testString = "xx xx".repeat(40);
-  // for (let i = 0; i < 3; i++) {
-  //   list.appendChild(ToDoBoxRemovable(testString));
-  // }
+  function callbackMouseOver(event) {
+    let leftBar = event.currentTarget.querySelector(".leftBar");
+    let rightBar = event.currentTarget.querySelector(".rightBar");
+    leftBar.classList.add("hover");
+    rightBar.classList.add("hover");
+  }
 
-  // EndTesting.
+  function callbackMouseOut(event) {
+    let leftBar = event.currentTarget.querySelector(".leftBar");
+    let rightBar = event.currentTarget.querySelector(".rightBar");
+    leftBar.classList.remove("hover");
+    rightBar.classList.remove("hover");
+  }
 
   // Returns a ToDoBox with text and a sign to click on. Clicking on that removes the toDoBox.
   function ToDoBoxRemovable(text) {
