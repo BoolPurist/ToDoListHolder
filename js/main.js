@@ -1,9 +1,27 @@
 /* jshint esversion: 6 */
 (function() {
   "use strict";
+  let toDoContainerName = "allToDos";
+
   let list = document.querySelector(".list");
   let adderBox = document.querySelector(".adderForToDo");
   let adderSign = adderBox.querySelector(".adderSign");
+
+  let toDosArray = window.localStorage.getItem(toDoContainerName);
+  if (
+    toDosArray === null ||
+    toDosArray === undefined ||
+    toDosArray.length === 0
+  ) {
+    toDosArray = [];
+  } else {
+    toDosArray = toDosArray.split(",");
+
+    toDosArray.forEach(function(item) {
+      let toDoBoxRemovable = ToDoBoxRemovable(item);
+      list.appendChild(toDoBoxRemovable);
+    });
+  }
 
   // If the website is used with a touch screen.
   document.addEventListener("touchstart", callbackTouch, false);
@@ -86,13 +104,41 @@
   adderSign.addEventListener(
     "click",
     function(event) {
+      // Grab the text of the textarea from the adder item of the next toDo item.
       let self = event.currentTarget;
       let textarea = self.parentNode.querySelector("textarea");
       let text = textarea.value;
+      console.log(text);
       if (text.length !== 0) {
+        // Prepares text of the textarea of the adder item and saved into the local storage as memory what toDos the user has entered.
+        text = text.trim();
+        text = removeExtraBlanks(text);
+        toDosArray.push(text);
+        window.localStorage.setItem(toDoContainerName, toDosArray);
+        // Clears the text content when pressed the adder sign so new text content can be entered.
         let toDoBoxRemovable = ToDoBoxRemovable(text);
         list.appendChild(toDoBoxRemovable);
         textarea.value = "";
+      }
+
+      // Alters a string that it has no more than one space in a row.
+      // The functions assumes that the string was trimmed before.
+      function removeExtraBlanks(string) {
+        let prevSpace = false;
+        let resultString = "";
+        for (let i = 0; i < string.length; i++) {
+          let currentLetter = string.charAt(i);
+          if (currentLetter === " ") {
+            if (!prevSpace) {
+              prevSpace = true;
+              resultString += currentLetter;
+            }
+          } else {
+            prevSpace = false;
+            resultString += currentLetter;
+          }
+        }
+        return resultString;
       }
     },
     false
@@ -140,6 +186,12 @@
     return toDoBoxRemovable;
 
     function callbackClick(event) {
+      let toDoTextToRemove = event.currentTarget.parentNode.querySelector("p")
+        .innerText;
+      console.log(toDosArray.indexOf(toDoTextToRemove));
+      toDosArray.splice(toDosArray.indexOf(toDoTextToRemove), 1);
+      console.log(toDosArray);
+      window.localStorage.setItem(toDoContainerName, toDosArray);
       event.currentTarget.parentNode.remove();
     }
 
