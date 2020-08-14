@@ -14,6 +14,9 @@
   border-radius 1s;
 @padding-borderLeft-text: 10px;
 
+@navbar-foreground-text-color: #88c1dd;
+@navbar-background-text-color: white;
+
 // MixIns
 // For every widget like the remover and adder to give size, color and margin.
 #mixInSymbol {
@@ -85,12 +88,47 @@ body {
   background-color: @background-color;
 }
 
+label {
+  font-weight: bold;
+  text-align: center;
+  font-family: cursive;
+  letter-spacing: 2px;
+}
+
+#linkNavbar {
+  width: max-content;
+  margin: auto;
+  display: flex;
+  align-content: stretch;
+
+
+  background-color: @navbar-foreground-text-color;
+  color: @navbar-background-text-color;
+    
+  a {    
+    text-decoration: none;
+    color: @navbar-background-text-color;
+    @padding-sides: 10px;
+    @space-height-take-up: 50px;
+    height: @space-height-take-up;
+    line-height: @space-height-take-up;
+    padding-left: @padding-sides;
+    padding-right: @padding-sides;    
+  }
+
+  a:hover {
+    background-color: @navbar-background-text-color;
+    color: @navbar-foreground-text-color;    
+  }
+
+}
+
 .firstColorSection {
   background-color: @background-color-header;
-  top: 0;
+  top: 0px;
   position: absolute;
   width: 100%;
-  height: 300px;
+  height: 400px;
   z-index: -1;
 }
 
@@ -106,12 +144,6 @@ body {
   display: grid;
   grid-template-rows: 1fr;
   row-gap: 20px;
-}
-label {
-  font-weight: bold;
-  text-align: center;
-  font-family: cursive;
-  letter-spacing: 2px;
 }
 
 // style hierarchy for .adderForToDo <div>
@@ -163,6 +195,7 @@ label {
   display: grid;
   grid-template-rows: 1fr;
   row-gap: 8px;
+
   .toToDoBoxRemovable {
     #mixInGridColSignText();
     .removable {
@@ -196,6 +229,7 @@ label {
         #barsHover(-1);
       }
     }
+
     .line {
       #mixInUnderlineText();
       #mixInHoverLighterItem(20%);
@@ -203,14 +237,22 @@ label {
       padding-left: @padding-borderLeft-text;
       margin-top: 9px;
     }
-  }
+
+  } 
+
+}
+
+// To make sure that first to-do-list item does
+// not cross the first color section.
+.toToDoBoxRemovable:first-child {
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 550px) {
-  .firstColorSection {
-    height: 280px;
-  }
 
+  .toToDoBoxRemovable:first-child {
+    margin-top: 50px;
+  }
   label {
     font-size: 16px;
     letter-spacing: 1px;
