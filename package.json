@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/BoolPurist/ToDoListHolder#readme",
   "devDependencies": {
-    "fs-change": "^0.5.1",
     "less": "^3.12.2"
   }
 }
