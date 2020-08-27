@@ -5,6 +5,7 @@
 @text-color-header: rgb(88, 175, 110);
 @text-underline-thickness: 2px;
 @text-size: 20px;
+
 @symbol-removable-size: 30px;
 @symbol-removable-margin-top: 30%;
 @symbol-removable-bar-radius: 50%;
@@ -14,8 +15,9 @@
   border-radius 1s;
 @padding-borderLeft-text: 10px;
 
-@navbar-foreground-text-color: #88c1dd;
+@navbar-foreground-text-color: #9ec2b3;
 @navbar-background-text-color: white;
+@navbar-text-size-mob: 15px;
 
 // MixIns
 // For every widget like the remover and adder to give size, color and margin.
@@ -97,11 +99,7 @@ label {
 
 #linkNavbar {
   width: max-content;
-  margin: auto;
-  display: flex;
-  align-content: stretch;
-
-
+  margin-left: auto;
   background-color: @navbar-foreground-text-color;
   color: @navbar-background-text-color;
     
@@ -109,6 +107,8 @@ label {
     text-decoration: none;
     color: @navbar-background-text-color;
     @padding-sides: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     @space-height-take-up: 50px;
     height: @space-height-take-up;
     line-height: @space-height-take-up;
@@ -249,6 +249,14 @@ label {
 }
 
 @media screen and (max-width: 550px) {
+  
+  #linkNavbar {
+      margin-right: 10px;
+      a{
+        font-size: @navbar-text-size-mob;
+      }
+  }
+  
 
   .toToDoBoxRemovable:first-child {
     margin-top: 50px;

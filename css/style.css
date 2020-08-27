@@ -49,15 +49,15 @@ label {
 }
 #linkNavbar {
   width: max-content;
-  margin: auto;
-  display: flex;
-  align-content: stretch;
-  background-color: #88c1dd;
+  margin-left: auto;
+  background-color: #9ec2b3;
   color: white;
 }
 #linkNavbar a {
   text-decoration: none;
   color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
   height: 50px;
   line-height: 50px;
   padding-left: 10px;
@@ -65,7 +65,7 @@ label {
 }
 #linkNavbar a:hover {
   background-color: white;
-  color: #88c1dd;
+  color: #9ec2b3;
 }
 .firstColorSection {
   background-color: #4f8d73;
@@ -220,6 +220,12 @@ label {
   margin-top: 30px;
 }
 @media screen and (max-width: 550px) {
+  #linkNavbar {
+    margin-right: 10px;
+  }
+  #linkNavbar a {
+    font-size: 15px;
+  }
   .toToDoBoxRemovable:first-child {
     margin-top: 50px;
   }

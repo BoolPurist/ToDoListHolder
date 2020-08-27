@@ -1,0 +1,25 @@
+{
+  "name": "todo-list-holder",
+  "version": "1.0.0",
+  "description": "Serves as an online To-Do-List.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lessWatch": "lessc less/style.less css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoolPurist/ToDoListHolder.git"
+  },
+  "keywords": [],
+  "author": "BoolPurist",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BoolPurist/ToDoListHolder/issues"
+  },
+  "homepage": "https://github.com/BoolPurist/ToDoListHolder#readme",
+  "devDependencies": {
+    "fs-change": "^0.5.1",
+    "less": "^3.12.2"
+  }
+}
